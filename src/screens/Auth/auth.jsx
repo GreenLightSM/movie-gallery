@@ -11,7 +11,7 @@ const Auth = ({ type }) => {
   return (
     <Wrap>
       <Block>
-        {!isSignUpNotFinished && (
+        {isSignUpNotFinished && type !== 'sign_in' && (
           <Welcome>Welcome back, {name || email}</Welcome>
         )}
         <Form type={type} />
