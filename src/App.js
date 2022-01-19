@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from 'react-router-dom'
+import './App.css'
+import Auth from './screens/Auth/auth'
+import Home from './screens/Home/home'
+import Welcome from './screens/Welcome/welcome'
+
+const routes = [
+  {
+    key: 0,
+    path: '/',
+    exact: true,
+    element: <Welcome />,
+  },
+  {
+    key: 1,
+    path: '/home',
+    element: <Home />,
+  },
+  {
+    key: 2,
+    path: '/sign-up',
+    element: <Auth type={'sign_up'} />,
+  },
+  {
+    key: 3,
+    path: '/sign-in',
+    element: <Auth type={'sign_in'} />,
+  },
+]
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Routes>
+      {routes.map(({ path, exact, element, key }) => (
+        <Route path={path} element={element} exact={exact} key={key} />
+      ))}
+    </Routes>
+  )
 }
 
-export default App;
+export default App
