@@ -1,4 +1,3 @@
-import bcrypt from 'bcryptjs'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
@@ -84,17 +83,17 @@ const Form = ({ type }) => {
       return
     }
 
-    const hashedPassword = bcrypt.hashSync(values.password, 8)
-
     const users = JSON.parse(localStorage.getItem('users')) || []
 
-    const newUsers = [...users, { ...values, password: hashedPassword }]
+    const newUsers = [...users, values]
+
+    // We could hash password, but it has no sense to do it now, cause in real life project it nust be done on backend side
 
     localStorage.removeItem('register_data')
     localStorage.setItem('users', JSON.stringify(newUsers))
     localStorage.setItem(
       'currentUser',
-      JSON.stringify({ ...values, password: hashedPassword })
+      JSON.stringify({ ...values, password: null })
     )
 
     navigate('/home')
@@ -110,7 +109,7 @@ const Form = ({ type }) => {
       return
     }
 
-    const isPassCorrect = bcrypt.compareSync(values.password, user.password)
+    const isPassCorrect = values.password === user.password
 
     if (!isPassCorrect) {
       alert('Wrong credentials')
