@@ -1,10 +1,10 @@
+import bcrypt from 'bcryptjs'
 import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import Button from '../../components/Button/button'
 import Input from '../../components/Input/input'
 import { FormWrap, Row, TabButton } from './style'
-const bcrypt = require('bcryptjs')
 
 const inputs_sign_in = [
   {
